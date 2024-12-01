@@ -3,7 +3,7 @@ import { Tin } from "../models/Tin";
 
 export function calculateRecipeRatio(ratio: number, recipe: Recipe): Recipe {
     recipe.forEach((ingredient: Ingredient) => {
-        ingredient.amount*=ratio
+        ingredient.initialAmount*=ratio
     })
     return recipe
 }

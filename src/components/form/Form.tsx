@@ -8,7 +8,7 @@ export default function Form() {
 const [ingredients, setIngredients] = useState<Ingredient[]>([])
 
 const addIngredient = () => {
-  setIngredients((oldArray) => [...oldArray, { name: "", amount: 0 }]);
+  setIngredients((oldArray) => [...oldArray, { name: "", initialAmount: 0 }]);
 };
 
     return (

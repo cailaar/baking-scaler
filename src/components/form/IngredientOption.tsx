@@ -33,7 +33,7 @@ export default function IngredientOptions({ setIngredients }: IngredientOptionsP
 
   const updateAmount = (ingredients: Ingredient[], name: string, amount: number): Ingredient[] => {
     return ingredients.map((ingredient) =>
-      ingredient.name === name ? { ...ingredient, amount } : ingredient
+      ingredient.name === name ? { ...ingredient, initialAmount: amount } : ingredient
     );
   };
 
@@ -41,7 +41,7 @@ export default function IngredientOptions({ setIngredients }: IngredientOptionsP
     setSelectedName(label); 
     setIngredients((oldArray) => {
       if (!oldArray.some((ing) => ing.name === label)) {
-        return [...oldArray, { name: label, amount: 0 }];
+        return [...oldArray, { name: label, initialAmount: 0 }];
       }
       return oldArray; 
     });

@@ -1,6 +1,7 @@
 export type Ingredient = {
     name: string
-    amount: number
+    initialAmount: number
+    adjustedAmount?: number
 }
 
 
