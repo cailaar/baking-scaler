@@ -3,6 +3,7 @@ import { Table, IconButton, VStack, Input } from "@chakra-ui/react";
 import { MdDelete } from "react-icons/md";
 import { Button } from "../ui/button";
 import { v4 as uuidv4 } from 'uuid';
+import { InputGroup } from "../ui/input-group";
 
 export type RecipeTableProps = {
     setRecipe: React.Dispatch<React.SetStateAction<Recipe>>
@@ -57,6 +58,9 @@ export default function RecipeTable({recipe, setRecipe}: RecipeTableProps) {
                 />
                 </Table.Cell>
                 <Table.Cell>
+                    <InputGroup
+                    endElement={"grams"}
+                    >
                     <Input
                     type="number"
                     placeholder="Enter amount"
@@ -64,9 +68,10 @@ export default function RecipeTable({recipe, setRecipe}: RecipeTableProps) {
                         updateIngredient(ingredient.id, "initialAmount", e.target.valueAsNumber)
                     }}
                     />
+                    </InputGroup>
                 </Table.Cell>
                 <Table.Cell>
-                    {ingredient.adjustedAmount}
+                    {ingredient.adjustedAmount} grams
                 </Table.Cell>
                 <Table.Cell>
             <IconButton onClick={() => removeIngredient(ingredient.id)}>
