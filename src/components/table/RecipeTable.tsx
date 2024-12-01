@@ -3,30 +3,28 @@ import { Table, IconButton, VStack, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { Button } from "../ui/button";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function RecipeTable() {
     const [recipe, setRecipe] = useState<Recipe>([])
 
     const addIngredient = () => {
-        setRecipe(oldRecipe => [...oldRecipe, {name: "", initialAmount: 0}])
-    }
+        setRecipe(oldRecipe => [...oldRecipe, { id: uuidv4(), name: "", initialAmount: 0 }]);
+    };
 
-    const removeIngredient = (name: string) => {
-        const newRecipe = [...recipe]
-        newRecipe.filter(item => item.name != name);
-        setRecipe(newRecipe)
-    }
+    const removeIngredient = (id: string) => {
+        setRecipe(oldRecipe => oldRecipe.filter(item => item.id !== id));
+    };
 
-    const updateIngredient = (index: number,field: keyof Ingredient, value: string| number ) => {
-        const newRecipe = [...recipe]
-        if (field == "name") {
-            newRecipe[index].name = value as string
-        } else if (field == "initialAmount") {
-            newRecipe[index].initialAmount = value as number
-        }
-        setRecipe(newRecipe)
-
-    }
+    const updateIngredient = (id: string, field: keyof Ingredient, value: string | number) => {
+        setRecipe(oldRecipe =>
+            oldRecipe.map(ingredient =>
+                ingredient.id === id
+                    ? { ...ingredient, [field]: value }
+                    : ingredient
+            )
+        );
+    };
 
     return (
         <VStack width="70vw">
@@ -45,13 +43,13 @@ export default function RecipeTable() {
   </Table.Header>
   <Table.Body>
     {
-        recipe.map((ingredient: Ingredient, index) => (
-            <Table.Row key ={index}>
+        recipe.map((ingredient: Ingredient) => (
+            <Table.Row key ={ingredient.id}>
                 <Table.Cell>
                 <Input
                 placeholder="Enter ingredient"
                 onChange={(e) => {
-                    updateIngredient(index, "name", e.target.value)
+                    updateIngredient(ingredient.id, "name", e.target.value)
                 }}
                 />
                 </Table.Cell>
@@ -60,7 +58,7 @@ export default function RecipeTable() {
                     type="number"
                     placeholder="Enter amount"
                     onChange={(e) => {
-                        updateIngredient(index, "initialAmount", e.target.valueAsNumber)
+                        updateIngredient(ingredient.id, "initialAmount", e.target.valueAsNumber)
                     }}
                     />
                 </Table.Cell>
@@ -68,7 +66,7 @@ export default function RecipeTable() {
                     {ingredient.adjustedAmount}
                 </Table.Cell>
                 <Table.Cell>
-            <IconButton onClick={() => removeIngredient(ingredient.name)}>
+            <IconButton onClick={() => removeIngredient(ingredient.id)}>
                 <MdDelete/>
             </IconButton>
                 </Table.Cell>

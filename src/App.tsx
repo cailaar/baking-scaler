@@ -4,8 +4,16 @@ import './App.css'
 import InitialSlider from './components/slider/InitialSlider'
 import NewSlider from './components/slider/NewSlider'
 import RecipeTable from './components/table/RecipeTable'
+import { useState } from 'react'
+let ratio = 0;
 
 function App() {
+
+  const [initialVolume, setInitialVolume] = useState(0)
+  const [desiredVolume, setDesiredVolume] = useState(0)
+
+  us
+
 
   return (
     <>
@@ -13,8 +21,8 @@ function App() {
     <HStack>
     <RecipeTable/>
     <VStack>
-    <InitialSlider/>
-    <NewSlider/>
+    <InitialSlider setVolume={setInitialVolume} volume ={initialVolume}/>
+    <NewSlider setVolume={setDesiredVolume} volume={desiredVolume}/>
     </VStack>
     </HStack>
     </>

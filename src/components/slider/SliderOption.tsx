@@ -2,16 +2,17 @@ import { useState } from "react"
 import { Slider } from "@/components/ui/slider"
 import { Heading } from "@chakra-ui/react"
 
+
 export type SliderOptionProps = {
     title: string
     initialValue: number
     maxValue: number
     step?: number
+    onChange: React.Dispatch<React.SetStateAction<number>>
 
 }
 
-export default function SliderOption({title, initialValue, maxValue, step = 1} : SliderOptionProps) {
-    const [value, setValue] = useState([initialValue])
+export default function SliderOption({title, initialValue, maxValue,onChange, step = 1} : SliderOptionProps) {
 
     const marks = []
     for (let i=0; i< maxValue+1; i+=step) {
@@ -25,11 +26,11 @@ export default function SliderOption({title, initialValue, maxValue, step = 1} :
 <>
 <Heading size={'sm'}>{title}</Heading>
 <Slider
-    value={value}
-    onValueChange={(e) => setValue(e.value)}
+    defaultValue={[initialValue]}
     step={step}
     marks={marks}
     max={maxValue}
+    onValueChangeEnd={(e) => onChange(e.value[0])}
     />
 </>
     
