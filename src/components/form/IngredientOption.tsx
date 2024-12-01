@@ -1,6 +1,6 @@
 "use client";
 
-import { createListCollection, Input } from "@chakra-ui/react";
+import { createListCollection, HStack, Input } from "@chakra-ui/react";
 import {
   SelectContent,
   SelectItem,
@@ -37,27 +37,29 @@ export default function IngredientOptions({ setIngredients }: IngredientOptionsP
     );
   };
 
+  const updateLabel = (label: string) => {
+    setSelectedName(label); 
+    setIngredients((oldArray) => {
+      if (!oldArray.some((ing) => ing.name === label)) {
+        return [...oldArray, { name: label, amount: 0 }];
+      }
+      return oldArray; 
+    });
+  }
+
   return (
-    <>
+    <HStack>
       <SelectRoot collection={ingredientsCollection} size="md" width="320px">
         <SelectLabel>Select ingredient</SelectLabel>
         <SelectTrigger>
           <SelectValueText placeholder="Select ingredient" />
         </SelectTrigger>
         <SelectContent>
-          {ingredientsCollection.items.map((ingredient) => (
+          {ingredientsCollection.items.map((ingredient, index) => (
             <SelectItem
               item={ingredient}
-              key={ingredient.value}
-              onSelect={() => {
-                setIngredients((oldArray) => {
-                  if (!oldArray.some((ing) => ing.name === ingredient.label)) {
-                    return [...oldArray, { name: ingredient.label, amount: 0 }];
-                  }
-                  return oldArray; 
-                });
-                setSelectedName(ingredient.label); 
-              }}
+              key={index}
+              onSelect={() => updateLabel(ingredient.label)}
             >
               {ingredient.label}
             </SelectItem>
@@ -71,11 +73,9 @@ export default function IngredientOptions({ setIngredients }: IngredientOptionsP
         onChange={(event) => {
           const amount = Number(event.target.value);
           if (!selectedName) return; 
-
           setIngredients((oldArray) => updateAmount(oldArray, selectedName, amount));
         }}
-        disabled={!selectedName} 
       />
-    </>
+    </HStack>
   );
 }
