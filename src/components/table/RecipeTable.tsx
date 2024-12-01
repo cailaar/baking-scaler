@@ -1,12 +1,15 @@
 import { Ingredient, Recipe } from "@/models/Recipe";
 import { Table, IconButton, VStack, Input } from "@chakra-ui/react";
-import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { Button } from "../ui/button";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function RecipeTable() {
-    const [recipe, setRecipe] = useState<Recipe>([])
+export type RecipeTableProps = {
+    setRecipe: React.Dispatch<React.SetStateAction<Recipe>>
+    recipe: Recipe
+}
+
+export default function RecipeTable({recipe, setRecipe}: RecipeTableProps) {
 
     const addIngredient = () => {
         setRecipe(oldRecipe => [...oldRecipe, { id: uuidv4(), name: "", initialAmount: 0 }]);
