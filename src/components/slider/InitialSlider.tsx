@@ -1,14 +1,17 @@
-import { Card } from "@chakra-ui/react";
-import SliderOption from "./SliderOption";
-import { useEffect, useState } from "react";
 import { calculateVolume } from "@/utils/Volume";
+import { Card } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import SliderOption from "./SliderOption";
 
 export type InitialSliderProps = {
-  setVolume: React.Dispatch<React.SetStateAction<number>>
-  volume: number
-}
+  setVolume: React.Dispatch<React.SetStateAction<number>>;
+  volume: number;
+};
 
-export default function NewSlider({setVolume, volume}: InitialSliderProps) {
+export default function InitialSlider({
+  setVolume,
+  volume,
+}: InitialSliderProps) {
   const [tinNumber, setTinNumber] = useState(0);
   const [tinDiameter, setTinDiameter] = useState(3);
   const [tinHeight, setTinHeight] = useState(6);
@@ -44,7 +47,8 @@ export default function NewSlider({setVolume, volume}: InitialSliderProps) {
         </Card.Description>
       </Card.Body>
       <Card.Footer>
-      Total Volume: {Math.round((volume + Number.EPSILON) * 100) / 100} inches<sup>3</sup>
+        Total Volume: {Math.round((volume + Number.EPSILON) * 100) / 100} inches
+        <sup>3</sup>
       </Card.Footer>
     </Card.Root>
   );
