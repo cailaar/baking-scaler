@@ -8,3 +8,8 @@ export type Ingredient = {
 
 export type Recipe = Ingredient[]
 
+export type TinAmount = {
+    diameter: number,
+    number: number
+}
+
