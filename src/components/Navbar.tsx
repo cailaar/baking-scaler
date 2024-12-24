@@ -17,7 +17,9 @@ export default function Navbar() {
         boxShadow="sm"
         justifyContent="space-between"
       >
-        <Heading>Baking Scaler</Heading>
+        <Heading onClick={() => (window.location.href = "/")}>
+          Baking Scaler
+        </Heading>
         <VStack flex="1" align="center">
           <Blockquote
             width="50vw"
