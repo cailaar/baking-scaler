@@ -16,3 +16,6 @@ export function calculateBatterTins(batterAmount: number, tinDiameter: number, t
     return Math.floor(batterAmount/totalVolume)
 
 }
+
+
+
