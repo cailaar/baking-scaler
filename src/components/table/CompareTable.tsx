@@ -21,9 +21,9 @@ export default function CompareTable({ amount }: CompareTableProps) {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {tinDiameters.map((diameter) => {
+          {tinDiameters.map((diameter, index) => {
             return (
-              <Table.Row>
+              <Table.Row key={index}>
                 <Table.Cell>{diameter}</Table.Cell>
                 <Table.Cell>{tinHeight}</Table.Cell>
                 <Table.Cell>
