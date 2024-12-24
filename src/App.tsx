@@ -1,13 +1,18 @@
-import { Heading } from "@chakra-ui/react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Navbar from "./components/Navbar";
+import ComparePage from "./components/pages/ComparePage";
 import MainPage from "./components/pages/MainPage";
 
 function App() {
   return (
-    <>
-      <Heading>Baking Scaler</Heading>
-      <MainPage />
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/compare" element={<ComparePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
